@@ -33,6 +33,12 @@
               placeholder="Enter name.."
             />
             <br />
+            <input
+              type="text"
+              id="roomname"
+              class="form-control"
+              placeholder="Enter room name.."
+            />
             <div class="card">
               <div class="card-block" id="messages"></div>
             </div>
@@ -52,12 +58,13 @@
         var element = (id) => {
           return document.getElementById(id);
         };
-
+        var room = "as";
         //Get Elements
         var status = element("status");
         var messages = element("messages");
         var textarea = element("textarea");
         var username = element("username");
+        var roomname = element("roomname");
         var clear = element("clear");
 
         //Set default status
@@ -75,17 +82,23 @@
         };
 
         //Connect to socket.io
-        var socket = io.connect("http://localhost:4000");
+
+        var socket = io.connect("http://localhost:4000", {
+          query: { name: prompt("type a room"), temp: prompt("a image link") },
+        });
 
         //Check for conenction
         if (socket !== undefined) {
           console.log("Connected to socket");
-
+          socket.on("rooms", (data) => {
+            console.log(data);
+          });
           //Handle output
           socket.on("output", (data) => {
             if (data.length) {
               data.map((x) => {
                 //Build out message div
+                console.log(x);
                 var message = document.createElement("div");
                 message.setAttribute("class", "chat-message");
                 message.textContent = x.name + ": " + x.message;

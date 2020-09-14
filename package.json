@@ -9,8 +9,12 @@
   "author": "Anton Jeejo",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
     "mongodb": "^3.5.9",
     "mongoose": "^5.9.25",
+    "mongoose-simple-random": "^0.4.1",
     "react-markdown": "^4.3.1",
     "socket.io": "^2.3.0"
   }
